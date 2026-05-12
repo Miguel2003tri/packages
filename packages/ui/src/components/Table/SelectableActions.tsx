@@ -1,4 +1,4 @@
-import { Transition } from '@headlessui/react'
+import { Transition, TransitionChild } from '@headlessui/react'
 
 import {
   CheckboxField,
@@ -40,7 +40,6 @@ const SelectableActions = <T extends FieldValues>({
           <CheckboxField
             name="selectAll"
             className="accent-primary-500 cursor-pointer"
-            crossOrigin=""
           />
           <Label
             name="selectAll"
@@ -49,42 +48,47 @@ const SelectableActions = <T extends FieldValues>({
             Seleccionar todo
           </Label>
         </div>
-        <Transition show={hasSelection} className="flex gap-4">
-          <Transition.Child
-            appear={true}
-            enter="transition ease-in-out duration-300 transform"
-            enterFrom="-translate-x-5 opacity-0"
-            enterTo="translate-x-0 opacity-100"
-            leave="transition ease-in-out duration-300 transform delay-100"
-            leaveFrom="translate-x-0 opacity-100"
-            leaveTo="-translate-x-5 opacity-0"
-          >
-            <button
-              onClick={onDuplicateSubmit}
-              className="inline-flex gap-2 text-blue-500 hover:text-blue-700"
-            >
-              Duplicar selección
-              <i className="material-symbols-outlined">content_copy</i>
-            </button>
-          </Transition.Child>
-          <Transition.Child
-            appear={true}
-            enter="transition ease-in-out duration-300 transform delay-100"
-            enterFrom="-translate-x-5 opacity-0"
-            enterTo="translate-x-0 opacity-100"
-            leave="transition ease-in-out duration-300 transform"
-            leaveFrom="translate-x-0 opacity-100"
-            leaveTo="-translate-x-5 opacity-0"
-          >
-            <button
-              onClick={onDeleteSubmit}
-              className="inline-flex gap-2 text-red-500 hover:text-red-700"
-            >
-              Eliminar selección
-              <i className="material-symbols-outlined">delete</i>
-            </button>
-          </Transition.Child>
-        </Transition>
+        <Transition
+          show={hasSelection}
+          children={
+            <div className="flex gap-4">
+              <TransitionChild
+                appear={true}
+                enter="transition ease-in-out duration-300 transform"
+                enterFrom="-translate-x-5 opacity-0"
+                enterTo="translate-x-0 opacity-100"
+                leave="transition ease-in-out duration-300 transform delay-100"
+                leaveFrom="translate-x-0 opacity-100"
+                leaveTo="-translate-x-5 opacity-0"
+              >
+                <button
+                  onClick={onDuplicateSubmit}
+                  className="inline-flex gap-2 text-blue-500 hover:text-blue-700"
+                >
+                  Duplicar selección
+                  <i className="material-symbols-outlined">content_copy</i>
+                </button>
+              </TransitionChild>
+              <TransitionChild
+                appear={true}
+                enter="transition ease-in-out duration-300 transform delay-100"
+                enterFrom="-translate-x-5 opacity-0"
+                enterTo="translate-x-0 opacity-100"
+                leave="transition ease-in-out duration-300 transform"
+                leaveFrom="translate-x-0 opacity-100"
+                leaveTo="-translate-x-5 opacity-0"
+              >
+                <button
+                  onClick={onDeleteSubmit}
+                  className="inline-flex gap-2 text-red-500 hover:text-red-700"
+                >
+                  Eliminar selección
+                  <i className="material-symbols-outlined">delete</i>
+                </button>
+              </TransitionChild>
+            </div>
+          }
+        ></Transition>
       </div>
       {children}
     </Form>
